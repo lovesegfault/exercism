@@ -1,7 +1,9 @@
 use std::borrow::Borrow;
-use std::io::{Read, Write};
 use std::iter::Cycle;
 use std::slice::Iter;
+
+#[cfg(feature = "io")]
+use std::io::{Read, Write};
 
 pub trait Captures<'a> {}
 impl<'a, T: ?Sized> Captures<'a> for T {}
@@ -10,6 +12,7 @@ impl<'a, T: ?Sized> Captures<'a> for T {}
 #[derive(Clone)]
 pub struct Xorcism<'k>(Cycle<Iter<'k, u8>>);
 
+#[cfg(feature = "io")]
 pub struct XorcismIO<'k, IO> {
     xorcism: Xorcism<'k>,
     io: IO,
@@ -72,6 +75,7 @@ impl<'k> Xorcism<'k> {
     }
 }
 
+#[cfg(feature = "io")]
 impl<'k, R: Read> Read for XorcismIO<'k, R> {
     fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize> {
         self.io.read(buf).map(|len| {
@@ -81,6 +85,7 @@ impl<'k, R: Read> Read for XorcismIO<'k, R> {
     }
 }
 
+#[cfg(feature = "io")]
 impl<'k, R: Write> Write for XorcismIO<'k, R> {
     fn write(&mut self, buf: &[u8]) -> std::io::Result<usize> {
         let mut buf = buf.to_owned();
