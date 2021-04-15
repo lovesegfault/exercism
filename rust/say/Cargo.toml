@@ -2,3 +2,5 @@
 edition = "2018"
 name = "say"
 version = "1.2.0"
+
+[dependencies]
