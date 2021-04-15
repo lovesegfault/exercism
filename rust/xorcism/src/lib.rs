@@ -55,17 +55,40 @@ impl<'k> Xorcism<'k> {
         data.into_iter().map(move |d| d.borrow() ^ self.read_key())
     }
 
-    fn reader(self, reader: impl Read + 'k) -> impl Read + 'k {
+    #[cfg(feature = "io")]
+    pub fn reader(self, reader: impl Read + 'k) -> impl Read + 'k {
         XorcismIO {
             xorcism: self,
             io: reader,
         }
     }
 
-    fn writer(self, writer: impl Write + 'k) -> impl Write + 'k {
+    #[cfg(feature = "io")]
+    pub fn writer(self, writer: impl Write + 'k) -> impl Write + 'k {
         XorcismIO {
             xorcism: self,
             io: writer,
         }
+    }
+}
+
+impl<'k, R: Read> Read for XorcismIO<'k, R> {
+    fn read(&mut self, buf: &mut [u8]) -> std::io::Result<usize> {
+        self.io.read(buf).map(|len| {
+            self.xorcism.munge_in_place(buf);
+            len
+        })
+    }
+}
+
+impl<'k, R: Write> Write for XorcismIO<'k, R> {
+    fn write(&mut self, buf: &[u8]) -> std::io::Result<usize> {
+        let mut buf = buf.to_owned();
+        self.xorcism.munge_in_place(&mut buf);
+        self.io.write(&buf)
+    }
+
+    fn flush(&mut self) -> std::io::Result<()> {
+        self.io.flush()
     }
 }

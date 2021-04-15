@@ -272,7 +272,6 @@ mod io {
     use super::*;
 
     #[apply(ref_str)]
-    #[ignore]
     fn reader_munges(key: &str, input: &str, expect: &[u8]) {
         let mut reader = Xorcism::new(key).reader(input.as_bytes());
         let mut buf = Vec::with_capacity(input.len());
@@ -282,7 +281,6 @@ mod io {
     }
 
     #[apply(ref_str)]
-    #[ignore]
     fn reader_roundtrip(key: &str, input: &str, expect: &[u8]) {
         let _ = expect;
 
@@ -296,7 +294,6 @@ mod io {
     }
 
     #[apply(ref_str)]
-    #[ignore]
     fn writer_munges(key: &str, input: &str, expect: &[u8]) {
         let mut writer_dest = Vec::new();
         {
@@ -307,7 +304,6 @@ mod io {
     }
 
     #[apply(ref_str)]
-    #[ignore]
     fn writer_roundtrip(key: &str, input: &str, expect: &[u8]) {
         let _ = expect;
 
