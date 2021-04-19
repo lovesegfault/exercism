@@ -1,6 +1,3 @@
-// The code below is a stub. Just enough to satisfy the compiler.
-// In order to pass the tests you can add-to or change any of this code.
-
 #[derive(Debug)]
 pub struct Duration(u64);
 
@@ -19,42 +16,20 @@ pub trait Planet {
     }
 }
 
-pub struct Mercury;
-impl Planet for Mercury {
-    const ORBITAL_FACTOR: f64 = 0.2408467;
+macro_rules! planet {
+    ($name:ident, $factor:expr) => {
+        pub struct $name;
+        impl Planet for $name {
+            const ORBITAL_FACTOR: f64 = $factor;
+        }
+    };
 }
 
-pub struct Venus;
-impl Planet for Venus {
-    const ORBITAL_FACTOR: f64 = 0.61519726;
-}
-
-pub struct Earth;
-impl Planet for Earth {
-    const ORBITAL_FACTOR: f64 = 1.0;
-}
-
-pub struct Mars;
-impl Planet for Mars {
-    const ORBITAL_FACTOR: f64 = 1.8808158;
-}
-
-pub struct Jupiter;
-impl Planet for Jupiter {
-    const ORBITAL_FACTOR: f64 = 11.862615;
-}
-
-pub struct Saturn;
-impl Planet for Saturn {
-    const ORBITAL_FACTOR: f64 = 29.447498;
-}
-
-pub struct Uranus;
-impl Planet for Uranus {
-    const ORBITAL_FACTOR: f64 = 84.016846;
-}
-
-pub struct Neptune;
-impl Planet for Neptune {
-    const ORBITAL_FACTOR: f64 = 164.79132;
-}
+planet!(Mercury, 0.2408467);
+planet!(Venus, 0.61519726);
+planet!(Earth, 1.0);
+planet!(Mars, 1.8808158);
+planet!(Jupiter, 11.862615);
+planet!(Saturn, 29.447498);
+planet!(Uranus, 84.016846);
+planet!(Neptune, 164.79132);
