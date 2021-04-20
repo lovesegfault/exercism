@@ -26,10 +26,12 @@
               "rustfmt-preview"
             ])
             fenixPkgs.rust-analyzer
+            cargo-edit
 
             ccls
 
-            cargo-edit
+            nasm
+
             nixpkgs-fmt
             exercism
           ];
