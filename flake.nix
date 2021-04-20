@@ -17,6 +17,7 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
+            # Rust
             (fenixPkgs.complete.withComponents [
               "cargo"
               "clippy-preview"
@@ -28,10 +29,18 @@
             fenixPkgs.rust-analyzer
             cargo-edit
 
+            # C
             ccls
 
+            # x86-64 Assembly
             nasm
 
+            # Haskell
+            haskell-language-server
+            ghc
+            stack
+
+            # Extras
             nixpkgs-fmt
             exercism
           ];
