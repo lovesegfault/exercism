@@ -27,6 +27,8 @@
             ])
             fenixPkgs.rust-analyzer
 
+            ccls
+
             cargo-edit
             nixpkgs-fmt
             exercism
