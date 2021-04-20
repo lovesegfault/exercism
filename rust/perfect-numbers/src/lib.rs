@@ -8,7 +8,8 @@ pub enum Classification {
 }
 
 fn aliquot_sum(n: u64) -> u64 {
-    (1..n).filter(|i| n % i == 0).sum()
+    let limit = (n / 2) + 1;
+    (1..limit).filter(|i| n % i == 0).sum()
 }
 
 pub fn classify(num: u64) -> Option<Classification> {
