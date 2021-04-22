@@ -80,3 +80,6 @@ result-*
 
 ### Direnv ###
 .direnv/
+
+### Exercism
+users/
