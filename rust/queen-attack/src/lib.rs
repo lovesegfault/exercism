@@ -26,7 +26,9 @@ impl ChessPosition {
     }
 
     pub fn diagonals(&self) -> impl Iterator<Item = Self> {
-        std::iter::empty()
+        let (x, y) = (self.file, self.rank);
+        let top_left = (0..y).rev().enumerate().map(|(i, y)| (x - i, y));
+        let top_right = (0..y).rev().enumerate().map(|(i, y)| (x + i, y));
     }
 
     pub fn to_bitboard(&self) -> usize {
