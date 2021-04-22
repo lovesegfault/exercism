@@ -39,6 +39,7 @@
             haskell-language-server
             ghc
             stack
+            ormolu
 
             # Extras
             nixpkgs-fmt
