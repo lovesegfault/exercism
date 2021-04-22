@@ -8,5 +8,5 @@ abbreviate :: Text -> Text
 abbreviate =
   T.toUpper
     . T.concat
-    . map (\w -> T.take 1 w <> (T.filter isUpper . T.dropWhile isUpper) w)
+    . map (T.take 1 <> T.filter isUpper . T.dropWhile isUpper)
     . T.split (\c -> isSpace c || c `elem` ['-', '_'])
