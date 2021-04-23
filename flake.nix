@@ -32,9 +32,6 @@
             # C
             ccls
 
-            # x86-64 Assembly
-            nasm
-
             # Haskell
             haskell-language-server
             ghc
