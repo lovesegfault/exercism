@@ -1,8 +1,8 @@
 fn count_at((x, y): (usize, usize), minefield: &[Vec<char>]) -> String {
-    let x_min = x.saturating_sub(1);
-    let y_min = y.saturating_sub(1);
-    let count = (x_min..(x + 2))
-        .flat_map(|x| (y_min..(y + 2)).map(move |y| (x, y)))
+    let (x_min, x_max) = (x.saturating_sub(1), x + 1);
+    let (y_min, y_max) = (y.saturating_sub(1), y + 1);
+    let count = (x_min..=x_max)
+        .flat_map(|x| (y_min..=y_max).map(move |y| (x, y)))
         .filter_map(|(x, y)| minefield.get(x).and_then(|r| r.get(y)))
         .filter(|&&c| c == '*')
         .count();
